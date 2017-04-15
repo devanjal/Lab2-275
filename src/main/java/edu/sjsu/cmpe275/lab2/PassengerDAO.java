@@ -6,10 +6,10 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 
-public class PassengerRepository {
+public class PassengerDAO {
 
 	private EntityManagerFactory entityManagerFactory;
-	public PassengerRepository() {
+	public PassengerDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("lab2");
 		//entityManagerFactory = new PersistenceProvider().createEntityManagerFactory;
 	}
@@ -48,7 +48,9 @@ public class PassengerRepository {
 		EntityManager manager = entityManagerFactory.createEntityManager();
 		try {
 			return manager.find(Passenger.class, Id);
-		} finally {
+		} catch (RuntimeException e) {
+			throw e;
+		}finally {
 		manager.close();
 		}
 	}
