@@ -4,18 +4,23 @@ package edu.sjsu.cmpe275.lab2;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
+//import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+//import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+//import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 @Entity
-@Table(name="passenger")
+@Table(name = "Passenger")
 public class Passenger {
 
 		@Id
@@ -36,7 +41,11 @@ public class Passenger {
 		@Column(name = "PHONE" , unique = true)
 	    private String phone;
 		
-		//private List<Reservation> reservations = new ArrayList<>();
+		
+		//private List<Flight> flights;
+		@OneToMany(targetEntity=Reservation.class,mappedBy = "passenger", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+		@Transient
+		private List<Reservation> reservations;
 	
 		
 		public Passenger(){}
@@ -90,8 +99,30 @@ public class Passenger {
 			this.phone = phone;
 		}
 		
-//		@OneToMany(mappedBy = "passenger", fetch = FetchType.EAGER)
+		
 //		public List<Reservation>  getReservations() {
 //			return reservations;
 //		}
+//		
+//		public void setReservations(List<Reservation> r) {
+//			this.reservations= r;
+//		}
+		
+//		@ManyToMany(mappedBy="passengers")
+//		public List<Flight> getFlights() {
+//			return flights;
+//		}
+//
+//		public void setFlights(List<Flight> flights) {
+//			this.flights = flights;
+//		}
+//		
+//		@ManyToMany(mappedBy="passengers")
+//		public List<Flight> getFlights() {
+//			return flights;
+//		}
+//		public void setFlights(List<Flight> flights) {
+//			this.flights= flights;
+//		}
 }
+
