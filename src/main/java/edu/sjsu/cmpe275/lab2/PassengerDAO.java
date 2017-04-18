@@ -1,4 +1,7 @@
 package edu.sjsu.cmpe275.lab2;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -54,5 +57,13 @@ public class PassengerDAO {
 		manager.close();
 		}
 	}
+	public  List<Reservation> findPassengerReservations(String Id) {
+		
+		EntityManager manager = entityManagerFactory.createEntityManager();
+		Query query = manager.createQuery("Select reservation from Reservation reservation where reservation.passenger="+Id);
+		List<Reservation> reservations =query.getResultList();
+		return reservations;
+	}
+	
 
 }
