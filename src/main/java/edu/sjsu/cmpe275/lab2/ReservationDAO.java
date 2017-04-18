@@ -4,6 +4,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 public class ReservationDAO {
 
@@ -12,6 +13,7 @@ public class ReservationDAO {
 			entityManagerFactory = Persistence.createEntityManagerFactory("lab2");
 			//entityManagerFactory = new PersistenceProvider().createEntityManagerFactory;
 		}
+		@Transactional
 		public void store(Reservation res) {
 			EntityManager manager = entityManagerFactory.createEntityManager();
 			EntityTransaction tx = manager.getTransaction();
@@ -26,6 +28,7 @@ public class ReservationDAO {
 				manager.close();
 			}
 		}
+		@Transactional
 		public void delete(String Id) {
 			EntityManager manager = entityManagerFactory.createEntityManager();
 			EntityTransaction tx = manager.getTransaction();
@@ -41,7 +44,7 @@ public class ReservationDAO {
 				manager.close();
 			}
 		}
-
+		@Transactional
 		public Reservation findById(String Id) {
 			
 			EntityManager manager = entityManagerFactory.createEntityManager();
