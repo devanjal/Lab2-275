@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -48,22 +49,7 @@ public class Flight {
 		@Embedded
 		private Plane plane; 
 		
-//		@ManyToMany
-//		@JoinTable(
-//				name="T_FLIGHT_PASSENGER",
-//				joinColumns={@JoinColumn(name="FLIGHT_ID", referencedColumnName="NUMBER")},
-//				inverseJoinColumns={@JoinColumn(name="PASSENGER_ID", referencedColumnName="ID")})
-//		@Transient
-//	    private List<Passenger> passengers= new ArrayList<>();
-	    
-		@ManyToOne
-		@JoinTable(
-				name="T_FLIGHT_RESERVATION",
-				joinColumns={@JoinColumn(name="FLIGHT_ID", referencedColumnName="NUMBER")},
-				inverseJoinColumns={@JoinColumn(name="RESERVATION_NO", referencedColumnName="ORDER_NUMBER")})
-	    
-	    private Reservation reservation;
-		public Flight(){;}
+		public Flight(){}
 		
 		public Flight(String number, int price, String from, String to, String departureTime, String arrivalTime,
 				int seatsLeft, String description,Plane plane) {
@@ -131,20 +117,9 @@ public class Flight {
 		public Plane getPlane() {
 			return plane;
 		}
+		
 		public void setPlane(Plane plane) {
 			this.plane = plane;
 		}
 		
-//
-//		public List<Passenger> getPassengers() {
-//			return passengers;
-//		}
-//		
-//		public Reservation getReservation() {
-//			return reservation;
-//		}
-//		public void setReservation(Reservation reservation) {
-//			this.reservation = reservation;
-//		}
-
 }
